@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+repomix-output.xml
+*.local
+
+# Environment variables — none currently used (everything runs on-device),
+# but good to have this in place before, if that ever changes
+.env
+.env.local
+.env.*.local
+
+# Chrome Web Store submission artifact — regenerate from dist/, don't commit
+*.zip
+
+# Vite dependency pre-bundling cache
+node_modules/.vite
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

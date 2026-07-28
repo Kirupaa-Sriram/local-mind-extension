@@ -1,0 +1,168 @@
+/* Core viewport bounds for the sliding panel drawer */
+.sidebar-container {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #333;
+  padding: 16px;
+  background-color: #f9f9fb;
+  min-height: 100vh;
+}
+
+/* Master branding typography */
+.sidebar-header h1 {
+  font-size: 20px;
+  margin: 0;
+  color: #1a1a2e;
+}
+
+.sidebar-header p {
+  font-size: 12px;
+  margin: 4px 0 16px 0;
+  color: #666;
+}
+
+/* Section dividers */
+.sidebar-content h2 {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  border-bottom: 1px solid #e1e1e8;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+
+/* Informational alert for fresh installs */
+.empty-state {
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  margin-top: 40px;
+  line-height: 1.5;
+}
+
+/* Layout engine spacing rules for our scrollable feed stack */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* The standalone card geometry layout blocks */
+.history-card {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  border: 1px solid #edeef2;
+}
+
+/* Interactive typography styles for our document links */
+.card-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.card-title:hover {
+  text-decoration: underline;
+}
+
+.card-url {
+  font-size: 11px;
+  color: #777;
+  margin: 0 0 6px 0;
+}
+
+.card-date {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* ---------------- Search UI ---------------- */
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.search-input {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  font-size: 14px;
+
+  border: 1px solid #d7dbe3;
+  border-radius: 8px;
+
+  outline: none;
+
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #2563eb;
+}
+
+.search-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.search-btn,
+.secondary-btn,
+.clear-history-btn {
+  padding: 8px 14px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.search-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.search-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.secondary-btn {
+  background: #eceff3;
+  color: #333;
+}
+
+.secondary-btn:hover:not(:disabled) {
+  background: #dfe4ea;
+}
+
+.clear-history-btn {
+  background: #e05555;
+  color: white;
+}
+
+.clear-history-btn:hover:not(:disabled) {
+  background: #c94141;
+}
+
+.search-btn:disabled,
+.secondary-btn:disabled,
+.clear-history-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
