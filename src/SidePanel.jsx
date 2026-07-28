@@ -225,37 +225,38 @@ function SidePanel() {
         ) : (
           <div className="history-list">
             {itemsToRender.map((page) => (
-              <div key={page.id} className="history-card" style={{ position: 'relative' }}>
-                <button
-                  onClick={() => deleteHistoryItem(page.id)}
-                  title="Delete this page from memory"
-                  aria-label="Delete this page from memory"
-                  style={{
-                    position: 'absolute',
-                    top: '8px',
-                    right: '8px',
-                    width: '20px',
-                    height: '20px',
-                    lineHeight: '20px',
-                    padding: 0,
-                    border: 'none',
-                    borderRadius: '50%',
-                    background: 'transparent',
-                    color: '#999',
-                    fontSize: '0.8em',
-                    cursor: 'pointer',
-                  }}
-                >
-                  🗑️
-                </button>
-                <a
-                  href={page.url}
-                  target="_blank"
-                  rel="noopener"
-                  className="card-title"
-                >
-                  {page.title || 'Untitled Page'}
-                </a>
+              <div key={page.id} className="history-card" >
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                    <a
+                      href={page.url}
+                      target="_blank"
+                      rel="noopener"
+                      className="card-title"
+                      style={{ flex: 1, minWidth: 0 }}
+                    >
+                    {page.title || 'Untitled Page'}
+                    </a>
+                    <button
+                        onClick={() => deleteHistoryItem(page.id)}
+                        title="Delete this page from memory"
+                        aria-label="Delete this page from memory"
+                        style={{
+                            flexShrink: 0,
+                            width: '20px',
+                            height: '20px',
+                            lineHeight: '20px',
+                            padding: 0,
+                            border: 'none',
+                            borderRadius: '50%',
+                            background: 'transparent',
+                            color: '#999',
+                            fontSize: '0.8em',
+                            cursor: 'pointer',
+                        }}
+                    >
+                    🗑️
+                    </button>
+                </div>
 
                 {isShowingSearchResults && (
                   <span className="match-badge" style={{ fontWeight: 600 }}>
