@@ -15,6 +15,7 @@ function SidePanel() {
     const [isSearching, setIsSearching] = useState(false);
     const [searchError, setSearchError] = useState(null);
     const [pipelineError, setPipelineError] = useState(null);
+    const [feedback, setFeedback] = useState(null);
 
     const loadHistory = () =>{
         if(chrome.storage && chrome.storage.local){
@@ -98,6 +99,13 @@ function SidePanel() {
         setSearchError(null);
     };
 
+    const showFeedback = (message, tone = 'success') => {
+        setFeedback({ message, tone });
+        window.setTimeout(() => {
+            setFeedback(null);
+        }, 3000);
+    };
+
     const clearHistory = () => {
         const confirmed = window.confirm(
             'This will permanently delete all saved browsing memory. Continue?'
@@ -107,16 +115,27 @@ function SidePanel() {
         chrome.storage.local.clear(() => {
             setHistory([]);
             setQueryVector(null);
+            showFeedback('All saved browsing memory was cleared.', 'success');
         });
     };
 
     const deleteHistoryItem = (id) => {
-     chrome.storage.local.get({ webHistory: [] }, (result) => {
-        const updated = result.webHistory.filter((item) => item.id !== id);
-        chrome.storage.local.set({ webHistory: updated });
-        // No need to manually update state here — chrome.storage.onChanged
-        // picks this up and updates `history`, which (via the useMemo below)
-        // also removes it from any active search results automatically.
+        const confirmed = window.confirm('Are you sure you want to delete this page from memory?');
+        if (!confirmed) return;
+
+        const itemToDelete = history.find((item) => item.id === id);
+        const updatedHistory = history.filter((item) => item.id !== id);
+
+        setHistory(updatedHistory);
+
+        chrome.storage.local.set({ webHistory: updatedHistory }, () => {
+            if (chrome.runtime.lastError) {
+                showFeedback('Could not delete this page. Please try again.', 'error');
+                return;
+            }
+
+            const title = itemToDelete?.title || 'This page';
+            showFeedback(`${title} was removed from memory.`, 'success');
         });
     };
     // Recomputes automatically whenever `history` or `queryVector` changes —
@@ -162,6 +181,22 @@ function SidePanel() {
               ✕
             </button>
           </div>
+        </div>
+      )}
+
+      {feedback && (
+        <div
+          style={{
+            margin: '0 16px 12px',
+            padding: '10px 12px',
+            borderRadius: '6px',
+            fontSize: '0.85em',
+            background: feedback.tone === 'error' ? '#fdecea' : '#e8f5e9',
+            color: feedback.tone === 'error' ? '#7a2020' : '#1b5e20',
+            border: `1px solid ${feedback.tone === 'error' ? '#e05555' : '#6abf69'}`,
+          }}
+        >
+          {feedback.message}
         </div>
       )}
 
