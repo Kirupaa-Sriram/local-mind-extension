@@ -17,10 +17,8 @@ export default defineConfig({
   build:{
     outDir: 'dist',
     emptyOutDir: true,
+    modulePreload: false,
     rollupOptions: {
-      // Entry points go here, NOT directly under `build`. `build.input`
-      // isn't a real Vite option, so it was being silently ignored — that's
-      // why offscreen.html never showed up in the build output list.
       input: {
         offscreen: resolve(__dirname, 'offscreen.html'),
       },
